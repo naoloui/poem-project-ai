@@ -1,17 +1,35 @@
-function generatePoem(event) {
-  event.preventDefault();
-
+function displayPoem(response) {
+  console.log("Poem generated");
   new Typewriter("#poem", {
-    strings: `In your arms.
-In your arms you hold me tight,
-Never letting go through the night.
-All my dreams are peaceful because of you,
-Holding me in your arms like you do.
-`,
+    strings: response.data.poem,
     autoStart: true,
     delay: 1,
     cursor: "",
   });
+}
+
+function generatePoem(event) {
+  event.preventDefault();
+  let instructionsInput = document.querySelector("#user-instructions");
+  let apiKey = "3bb429560a4tfe3ecf96fae66oed5d7f";
+  let prompt = `Generate a poem about ${instructionsInput.value}`;
+  let context =
+    "You are a romantic poem expert. You want to write a poem that is romantic and beautiful. Your mission is to generate a 4-line poem in basic HTML. Make sure to follow the user instructions and seperate each line with a <br />.";
+  let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=~${prompt}&context=${context}&key=${apiKey}`;
+
+  console.log("Generating poem...");
+  console.log(`Prompt: ${prompt}`);
+  console.log(`Context: ${context}`);
+
+  axios
+    .get(apiUrl)
+    .then((response) => {
+      displayPoem(response.data); // assuming response.data contains the poem
+    })
+    .catch((error) => {
+      console.error("Error generating poem:", error);
+      alert("There was an error generating your poem. Please try again.");
+    });
 }
 
 let poemFormElement = document.querySelector("#poem-generator-form");
