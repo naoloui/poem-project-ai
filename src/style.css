@@ -73,7 +73,7 @@ form {
   margin-top: 10px;
 }
 
-.hidden {
+.class-hidden {
   display: none;
 }
 
@@ -90,6 +90,8 @@ a {
 
 .generating {
   animation: blink-animation 1s steps(5, start) infinite;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 10px;
 }
 
 @keyframes blink-animation {

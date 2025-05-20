@@ -1,10 +1,16 @@
 function displayPoem(response) {
-  new Typewriter("#poem", {
-    strings: response.data.poem,
+  new Typewriter("#poem", "#answer", {
+    strings: response.data.answer,
     autoStart: true,
     delay: 1,
     cursor: "",
   });
+
+  let poemElement = document.querySelector("#poem");
+  let answerElement = document.querySelector("#answer");
+  poemElement.innerHTML = response.data.answer;
+  poemElement.classList.remove("generating");
+  answerElement.classList.add("poem-generated");
 }
 
 function generatePoem(event) {
@@ -16,8 +22,8 @@ function generatePoem(event) {
     "You are a romantic poem expert. You want to write a poem that is romantic and beautiful. Your mission is to generate a 4-line poem in basic HTML. Make sure to follow the user instructions and seperate each line with a <br />.";
   let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=~${prompt}&context=${context}&key=${apiKey}`;
 
-  let poemElement = document.querySelector("poem");
-
+  let poemElement = document.querySelector("#poem");
+  poemElement.classList.remove("poem-hidden");
   poemElement.innerHTML = `<div class="generating"> ⏳ Generating a poem about ${instructionsInput.value}</div>`;
 
   axios
@@ -32,4 +38,4 @@ function generatePoem(event) {
 }
 
 let poemFormElement = document.querySelector("#poem-generator-form");
-poemFormElement.addEventListener("submit", generatePoem);
+poemFormElement.addEventListener("submit", generatePoem, "#answer");
