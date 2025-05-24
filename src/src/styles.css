@@ -47,6 +47,7 @@ form {
   width: 80%;
   border-radius: 50px;
   line-height: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .hints {
@@ -56,7 +57,11 @@ form {
   font-size: 12px;
 }
 
-.poem {
+.class-hidden {
+  display: none;
+}
+
+.answer-poem-generated {
   font-size: 14px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   padding: 30px;
@@ -71,10 +76,6 @@ form {
   max-width: 600px;
   margin: 0 auto;
   margin-top: 10px;
-}
-
-.class-hidden {
-  display: none;
 }
 
 footer {
